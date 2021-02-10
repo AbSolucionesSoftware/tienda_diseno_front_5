@@ -1,0 +1,29 @@
+
+#foot{
+    //position: absolute;
+}
+
+ #is:hover{
+    -webkit-transform:scale(1.2);transform:scale(1.2);
+    overflow:hidden;
+}
+
+.footer-border{
+    border-bottom: 1px solid gray;
+}
+.contenedor-logo{
+    display: flex;
+    justify-content:right;
+    align-items: right;
+}
+.logos{
+    height: 75px; 
+    width: 200px;
+    display: flex;
+    justify-content: right;
+    align-items: right;
+}
+.logotipo{
+    max-width: 100%;
+    max-height: 100%;
+}
