@@ -5,6 +5,7 @@ import './categorias.scss';
 import './preloading.scss';
 import clienteAxios from '../../config/axios';
 import { MenuContext } from '../../context/carritoContext';
+import { MenuItem } from 'react-bootstrap';
 
 const { SubMenu } = Menu;
 
@@ -85,7 +86,7 @@ const Categorias = (props) => {
 			<SubMenu
 				key={categoria.categoria}
 				title={categoria.categoria}
-				className="submenu-categoria nav-font-color-categorias container-subcategorias-nav size-submenu-cat font-foot"
+				className="submenu-categoria nav-font-color-categorias container-subcategorias-nav size-submenu-cat font-cates"
 				onTitleClick={(e) => {
 					if(e.key === categoria.categoria){
 						props.history.push(`/filtros/${temporadaSeleccionada}/${categoria.categoria}/${subcategoriaSeleccionada}/${generoSeleccionado}`);
@@ -98,7 +99,7 @@ const Categorias = (props) => {
 				{categoria.subcCategoria.map((sub) => {
 					return (
 						<Menu.Item
-							className="font-foot"
+							className="font-subCate"
 							key={sub._id}
 							onClick={() => {
 								props.history.push(`/filtros/${temporadaSeleccionada}/${categoriaSeleccionada}/${sub._id}/${generoSeleccionado}`);
@@ -118,7 +119,7 @@ const Categorias = (props) => {
 		if(temporada._id){
 			return (
 				<Menu.Item
-					className="nav-font-color-categorias font-foot"
+					className="nav-font-color-categorias font-genero"
 					key={index}
 					onClick={() => {
 						props.history.push(`/filtros/${temporada._id}/${categoriaSeleccionada}/${subcategoriaSeleccionada}/${generoSeleccionado}`);
@@ -135,7 +136,7 @@ const Categorias = (props) => {
 	const categorias_generos = generos.map((generos) => {
 		return (
 			<Menu.Item
-				className="font-foot"
+				className="submenu-categoria nav-font-color-categorias container-subcategorias-nav size-submenu-cat font-genero"
 				key={generos._id}
 				onClick={() => {
 					props.history.push(`/filtros/${temporadaSeleccionada}/${categoriaSeleccionada}/${subcategoriaSeleccionada}/${generos._id}`);
@@ -149,34 +150,42 @@ const Categorias = (props) => {
 	});
 
 	return (
+		<div>
 		<Layout className="container-subcategorias-nav d-lg-inline size-layout-cat">
 			{/* <Spin className="ml-5 d-inline spin-nav-categorias" spinning={loading} /> */}
 			<Menu
-				className="categorias-navbar d-inline size-menu-cat font-foot"
+				className="categorias-navbar d-inline size-menu-cat font-genero"
+				theme="light"
+				mode="horizontal"
+				defaultSelectedKeys={[ window.location.pathname ]}
+				triggerSubMenuAction="click"
+			>
+				{generos.length !== 0 ? (
+					categorias_generos
+				) : (
+					<Menu.Item className="d-none" />
+				)}
+				<SubMenu
+					title="Temporadas"
+					className="submenu-categoria nav-font-color-categorias container-subcategorias-nav size-submenu-cat font-genero"
+
+				>
+				{temporadas_nav}
+				</SubMenu>
+			</Menu>
+		</Layout>
+		<Layout className="container-subcategorias-nav size-layout-cat">
+			<Menu
+				className="categorias-navbar d-inline size-menu-cat"
 				theme="light"
 				mode="horizontal"
 				defaultSelectedKeys={[ window.location.pathname ]}
 				triggerSubMenuAction="click"
 			>
 				{categorias_nav}
-				<SubMenu
-					title="Temporadas"
-					className="submenu-categoria nav-font-color-categorias container-subcategorias-nav size-submenu-cat font-foot"
-
-				>
-				{temporadas_nav}
-			</SubMenu>
-				{generos.length !== 0 ? (
-					<SubMenu title="Género" className="submenu-categoria nav-font-color-categorias container-subcategorias-nav size-submenu-cat font-foot">
-						{categorias_generos}
-					
-
-					</SubMenu>
-				) : (
-					<Menu.Item className="d-none" />
-				)}
 			</Menu>
 		</Layout>
+		</div>
 	);
 };
 

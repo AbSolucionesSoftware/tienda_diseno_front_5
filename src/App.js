@@ -4,7 +4,7 @@ import 'antd/dist/antd.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import routes from './config/routes';
 import { Helmet } from 'react-helmet';
-import './scss/styleEspinoza.scss';
+import './scss/disenoCinco.scss';
 import { MenuProvider } from './context/carritoContext';
 
 export default function App() {
@@ -12,7 +12,7 @@ export default function App() {
 		<div>
 			<Helmet>
 				<meta charSet="utf-8" />
-				<title>Zapateria Espinoza3</title>
+				<title>Diseno Cinco</title>
 			</Helmet>
 			<MenuProvider>
 				<Router>

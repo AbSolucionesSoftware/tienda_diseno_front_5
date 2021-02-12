@@ -120,40 +120,40 @@ const Navegacion = (props) => {
 		<Layout className="layout navbar-menu-general a00">
 			<Header className=" a1">
 				<div className="menuCon a2">
-					<div className="top-menu row a3 container-prin">
-						<div className="col-lg-12 container-pages a4">
+					<div className="top-menu row a3">
+						<div className="col-lg-12 a4">
 							<Menu
-								className="navbar-menu-sesion float-right nav-font-pages a5 font-foot"
+								className="navbar-menu-sesion float-right nav-font-pages font-nav-sec a5"
 								/* theme="light" */
 								mode="horizontal"
 								defaultSelectedKeys={[ window.location.pathname ]}
 								inlineindent={0}
 							>
-								<Menu.Item className="nav-font-color nav-border-color a6" key="/">
+								<Menu.Item className="nav-font-color nav-border-color font-nav-sec a6" key="/">
 									<div className="centrar-nav" >Inicio</div>
 									<Link to="/" />
 									
 								</Menu.Item>
-								<Menu.Item className="nav-font-color nav-border-color a6" key="/productos">
+								<Menu.Item className="nav-font-color nav-border-color font-nav-sec a6" key="/productos">
 									<div className="centrar-nav" >Productos</div>
 									<Link to="/productos" />
 								</Menu.Item>
 								{ofertas.length ? (
-									<Menu.Item className="nav-font-color nav-border-color a6" key="/ofertas">
+									<Menu.Item className="nav-font-color nav-border-color font-nav-sec a6" key="/ofertas">
 										<div className="centrar-nav" >Ofertas</div>
 										<Link to="/ofertas" />
 									</Menu.Item>
 								) : (
 									<Menu.Item className="d-none" />
 								)}
-								<Menu.Item className="nav-font-color nav-border-color a6" key="/blog">
+								<Menu.Item className="nav-font-color nav-border-color font-nav-sec a6" key="/blog">
 									<div className="centrar-nav" >Blog</div>
 									<Link to="/blog" />
 								</Menu.Item>
 								{tienda.length === 0 ? (
 									<Menu.Item className="d-none" />
 								) : (
-									<Menu.Item className="nav-font-color nav-border-color a6" key="/quienes_somos">
+									<Menu.Item className="nav-font-color nav-border-color font-nav-sec a6" key="/quienes_somos">
 										<div className="centrar-nav" >Quiénes somos</div>
 										<Link to="/quienes_somos" />
 									</Menu.Item>
@@ -167,16 +167,19 @@ const Navegacion = (props) => {
 		
 		{/* DIVISOR PARA EL INPUT  */}
 
-		<Layout className="layout  a0">
+		<Layout className="layout a0">
 			<Header className=" a1">
-				<div className="menuCon  a2">
+				<div className="menuCon a2">
 					<div className="top-menu row a3">
-						<div className="col-lg-9 row-logo-search">
-							<div className="row row-logo-search-2 ">
+						<div className="col-lg-5">
+							<Categorias />
+						</div>
+						<div className="col-lg-2 row-logo-search d-flex justify-content-start">
+							<div className="row row-logo-search-2">
 									{!tienda.imagenLogo ? (
 										<div className="d-none" />
 									) : (
-										<div className="col-lg-3">
+										// <div className="">
 											<Link to="/">
 												<div className="contenedor-logo">
 													<img
@@ -186,135 +189,135 @@ const Navegacion = (props) => {
 													/>
 												</div>
 											</Link>
-										</div>
+										// </div>
 									)}
-								<div className="col-lg-8 row input-search">
-									<Input
-										onChange={valor}
-										className="input-search border-color-search-input"
-									/>
-									
-									<Button
-										onClick={(value) => props.history.push(`/searching/${busqueda}`)}
-										className="boton-search border-color-search-boton"
-									>
-										<SearchOutlined style={{fontSize: 25}}/>
-									</Button>
-									
-								</div>
 							</div>
 						</div>
+
 						{/* INICIO DE AVATAR, TU CARRITO Y ENTRAR  */}
-						<div className="col-lg-3 a4 container-pages">
-							<Menu
-								className="float-right navbar-menu-sesion a50"
-								/* theme="light" */
-								mode="horizontal"
-								defaultSelectedKeys={[ window.location.pathname ]}
-								inlineindent={0}
-							>
-								{!decoded || decoded.rol === true ? (
-									<Menu.Item key="" className="d-none" />
-								) : (
-									<Menu.Item className="nav-font-color-sesion a6 font-foot" key="/pedidos">
-										<div className="centrar-nav" >Mis compras</div>
-										<Link to="/pedidos" />
-									</Menu.Item>
-								)}
-								{!decoded || decoded.rol === true ? (
-									<Menu.Item key="" className="d-none" />
-								) : (
-									<Menu.Item className="nav-font-color-sesion a6" key="/shopping_cart">
-										<div className="centrar-nav" >
-											<Badge count={carrito}>
-												<ShoppingOutlined style={{ fontSize: 25 }} />
-												<Link to="/shopping_cart" />
-											</Badge>
-										</div>
-									</Menu.Item>
-								)}
-								{token && decoded['rol'] === false ? (
-									<SubMenu
-										className="nav-font-color-sesion a6"
-										icon={
-											!decoded.imagen && !decoded.imagenFireBase ? (
-												<Avatar size="large" style={{ backgroundColor: '#87d068' }}>
-													<p>{decoded.nombre.charAt(0)}</p>
-												</Avatar>
-											) : decoded.imagenFireBase ? (
-												<Avatar size="large" src={decoded.imagenFireBase} />
-											) : (
-												<Avatar size="large" src={aws + decoded.imagen} />
-											)
-										}
-									>
-										<Menu.Item key="" className="nav-font-color-sesion font-foot">
-											<SettingOutlined />Mi cuenta<Link to="/perfiles" />
-										</Menu.Item>
-										<Menu.Item>
-											<div
-												className="text-danger centrar-nav font-foot"
-												onClick={() => {
-													localStorage.removeItem('token');
-													firebase.auth().signOut();
-													setTimeout(() => {
-														window.location.reload();
-													}, 1000);
-												}}
-											>
-												<LogoutOutlined />Cerrar Sesión
+						<div className="col-lg-5 row a4 mt-2 d-flex justify-content-end containe-categorias">
+							<div className="containe-categorias d-flex align-items-center ">
+								<Search
+									placeholder="¿Qué estás buscando?"
+									onSearch={(value) => props.history.push(`/searching/${value}`)}
+									className="search-navbar"
+								/>
+							</div>
+							<div className="containe-categorias">
+								<Menu
+									className="float-right navbar-menu-sesion a50"
+									/* theme="light" */
+									mode="horizontal"
+									defaultSelectedKeys={[ window.location.pathname ]}
+									inlineindent={0}
+								>
+									
+									{!decoded || decoded.rol === true ? (
+										<Menu.Item key="" className="d-none" />
+									) : (
+										<Menu.Item className="nav-font-color-sesion a6" key="/shopping_cart">
+											<div className="centrar-nav" >
+												<Badge count={carrito}>
+													<ShoppingOutlined style={{ fontSize: 25 }} />
+													<Link to="/shopping_cart" />
+												</Badge>
 											</div>
 										</Menu.Item>
-									</SubMenu>
-								) : decoded && decoded['rol'] === true ? (
-									<SubMenu
-										className="nav-font-color nav-border-color a6"
-										icon={
-											!decoded.imagen ? (
-												<Avatar size="large" style={{ backgroundColor: '#87d068' }}>
-													<p>{decoded.nombre.charAt(0)}</p>
-												</Avatar>
+									)}
+									
+									{token && decoded['rol'] === false ? (
+										<SubMenu
+											className="nav-font-color-sesion a6"
+											icon={
+												!decoded.imagen && !decoded.imagenFireBase ? (
+													<Avatar size="large" style={{ backgroundColor: '#87d068' }}>
+														<p>{decoded.nombre.charAt(0)}</p>
+													</Avatar>
+												) : decoded.imagenFireBase ? (
+													<Avatar size="large" src={decoded.imagenFireBase} />
+												) : (
+													<Avatar size="large" src={aws + decoded.imagen} />
+												)
+											}
+										>	
+										{/* Mis compras dentro del menu peque;o */}
+											{!decoded || decoded.rol === true ? (
+												<Menu.Item key="" className="d-none" />
 											) : (
-												<Avatar size="large" src={aws + decoded.imagen}>
-													{/* <p>{decoded.nombre.charAt(0)}</p> */}
-												</Avatar>
-											)
-										}
-									>
-										<Menu.Item key="" className="font-foot a6">
-											<SettingOutlined />Panel de administrador<Link to="/admin" />
+												<Menu.Item className="nav-font-color-sesion a6 font-foot" key="/pedidos">
+													<ShoppingOutlined />Mis pedidos
+													<Link to="/pedidos" />
+												</Menu.Item>
+											)}
+											<Menu.Item key="" className="nav-font-color-sesion font-foot">
+												<SettingOutlined />Mi cuenta<Link to="/perfiles" />
+											</Menu.Item>
+											<Menu.Item>
+												<div
+													className="text-danger centrar-nav font-foot"
+													onClick={() => {
+														localStorage.removeItem('token');
+														firebase.auth().signOut();
+														setTimeout(() => {
+															window.location.reload();
+														}, 1000);
+													}}
+												>
+													<LogoutOutlined />Cerrar Sesión
+												</div>
+											</Menu.Item>
+										</SubMenu>
+									) : decoded && decoded['rol'] === true ? (
+										<SubMenu
+											className="nav-font-color nav-border-color a6"
+											icon={
+												!decoded.imagen ? (
+													<Avatar size="large" style={{ backgroundColor: '#87d068' }}>
+														<p>{decoded.nombre.charAt(0)}</p>
+													</Avatar>
+												) : (
+													<Avatar size="large" src={aws + decoded.imagen}>
+														{/* <p>{decoded.nombre.charAt(0)}</p> */}
+													</Avatar>
+												)
+											}
+										>
+											<Menu.Item key="" className="font-foot a6">
+												<SettingOutlined />Panel de administrador<Link to="/admin" />
+											</Menu.Item>
+											<Menu.Item key="" className=" a6">
+												<div
+													className="text-danger centrar-nav font-foot"
+													onClick={() => {
+														localStorage.removeItem('token');
+														firebase.auth().signOut();
+														setTimeout(() => {
+															window.location.reload();
+														}, 1000);
+													}}
+												>
+													<LogoutOutlined />Cerrar Sesión
+												</div>
+											</Menu.Item>
+										</SubMenu>
+									) : (
+										<Menu.Item key="" className="d-none" />
+									)}
+									{token === '' || token === null ? (
+										<Menu.Item key="" className="nav-font-color-sesion nav-border-color a6">
+											<div className="centrar-nav" ><UserOutlined style={{fontSize: 27}}/></div>
+											<Link to="/entrar" />
 										</Menu.Item>
-										<Menu.Item key="" className=" a6">
-											<div
-												className="text-danger centrar-nav font-foot"
-												onClick={() => {
-													localStorage.removeItem('token');
-													firebase.auth().signOut();
-													setTimeout(() => {
-														window.location.reload();
-													}, 1000);
-												}}
-											>
-												<LogoutOutlined />Cerrar Sesión
-											</div>
-										</Menu.Item>
-									</SubMenu>
-								) : (
-									<Menu.Item key="" className="d-none" />
-								)}
-								{token === '' || token === null ? (
-									<Menu.Item key="" className="nav-font-color-sesion nav-border-color a6">
-										<div className="centrar-nav" ><UserOutlined style={{fontSize: 27}}/></div>
-										<Link to="/entrar" />
-									</Menu.Item>
-								) : (
-									<Menu.Item key="" className="d-none" />
-								)}
-							</Menu>
+									) : (
+										<Menu.Item key="" className="d-none" />
+									)}
+								</Menu>
+							</div>
 						</div>
-						{/* FIN DE AVATAR, TU CARRITO Y ENTRAR  */}
+						{/* FIN DE AVATAR, TU CARRITO Y ENTRAR y todo lo del frente  */}
 
 					</div>
+
 					<div className="top-menu-responsive">
 						<Button type="link" className="barsMenu" onClick={showDrawer}>
 							<MenuOutlined className="menu-responsivo-icon" style={{ fontSize: 22 }} />

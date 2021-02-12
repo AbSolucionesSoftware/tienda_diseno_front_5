@@ -16,7 +16,7 @@ export default function LayoutBasic(props) {
 				<div className="cuerpo bg-layout">
 					<Layout>
 						<Navegacion />
-						<Categorias />
+						{/* <Categorias /> */}
 						<Content style={{ height: 'auto' }} className="bg-layout">
 							<div className="site-layout-content flex">
 								<LoadRoutes routes={routes} />
