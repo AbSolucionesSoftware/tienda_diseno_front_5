@@ -41,6 +41,7 @@ const Navegacion = (props) => {
 
 	useEffect(
 		() => {
+			setLoading(true);
 			setActive(true);
 			obtenerOfertas();
 			obtenerQuienesSomos();
