@@ -41,7 +41,6 @@ const Navegacion = (props) => {
 
 	useEffect(
 		() => {
-			setLoading(true);
 			setActive(true);
 			obtenerOfertas();
 			obtenerQuienesSomos();
@@ -51,6 +50,10 @@ const Navegacion = (props) => {
 		},
 		[ token, active ]
 	);
+
+	useEffect(() => {
+		setLoading(true);
+	}, [])
 
 	async function obtenerCarrito() {
 		await clienteAxios
